@@ -5,6 +5,11 @@ int motorPin2 = 38; // Pink / Розовый - 28BYJ48 pin 2
 int motorPin3 = 40; // Yellow / Желтый - 28BYJ48 pin 3
 int motorPin4 = 42; // Orange / Оранжевый - 28BYJ48 pin 4
 
+int motorPin5 = 46; // Blue / Синий - 28BYJ48 pin 1
+int motorPin6 = 48; // Pink / Розовый - 28BYJ48 pin 2
+int motorPin7 = 50; // Yellow / Желтый - 28BYJ48 pin 3
+int motorPin8 = 52; // Orange / Оранжевый - 28BYJ48 pin 4
+
 int buttonPin1 = 22; // кнопку подключаем к Pin 22.
 int buttonPin2 = 24; // кнопку подключаем к Pin 24.
 int buttonPin3 = 26; // кнопку подключаем к Pin 26.
@@ -27,6 +32,11 @@ void setup() {
   pinMode(motorPin2, OUTPUT);
   pinMode(motorPin3, OUTPUT);
   pinMode(motorPin4, OUTPUT);
+  
+  pinMode(motorPin5, OUTPUT);
+  pinMode(motorPin6, OUTPUT);
+  pinMode(motorPin7, OUTPUT);
+  pinMode(motorPin8, OUTPUT);
 
 // Одна нога кнопки подключается к GND, другая к Pin №
 // (никаких внешних резисторов не нужно).
@@ -70,6 +80,7 @@ void anticlockwise() {
   for(int i = 0; i < 8; i++) {
     Serial.println('1buttonPresed'); 
     setOutput(i);
+    setOutput1(i);
     delayMicroseconds(motorSpeed);
     steps = steps++;
   }
@@ -79,6 +90,7 @@ void clockwise() {
   for(int i = 7; i >= 0; i--)  {
       Serial.println('2buttonPresed');
       setOutput(i);
+      setOutput1(i);
       delayMicroseconds(motorSpeed);
       steps = steps++;  
   }
@@ -89,4 +101,11 @@ void setOutput(int out) {
   digitalWrite(motorPin2, bitRead(lookup[out], 1));
   digitalWrite(motorPin3, bitRead(lookup[out], 2));
   digitalWrite(motorPin4, bitRead(lookup[out], 3));
+}
+
+void setOutput1(int out) {
+  digitalWrite(motorPin5, bitRead(lookup[out], 0));
+  digitalWrite(motorPin6, bitRead(lookup[out], 1));
+  digitalWrite(motorPin7, bitRead(lookup[out], 2));
+  digitalWrite(motorPin8, bitRead(lookup[out], 3));
 }
