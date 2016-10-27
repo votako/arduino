@@ -1,3 +1,6 @@
+#include <Servo.h> 
+ 
+Servo myservo;
 // declare variables for the motor pins
 //tests for changes in code
 int motorPin1 = 36; // Blue / Синий - 28BYJ48 pin 1
@@ -23,12 +26,18 @@ int motorSpeed = 1800;
 //кол-во шагов
 int steps = 0;
 
+int led0 = 13;
+int led1 = 12;
+
 //
 int lookup[8] = {
 B01000, B01100, B00100, B00110, B00010, B00011, B00001, B01001};
 /////////////////////////////////////////////////////////////////
 
 void setup() {
+  pinMode(led0, OUTPUT); 
+  pinMode(led1, OUTPUT); 
+  myservo.attach(9);  // attaches the servo on pin 9 to the servo object 
 // declare the motor pins as outputs.
   pinMode(motorPin1, OUTPUT);
   pinMode(motorPin2, OUTPUT);
@@ -56,7 +65,8 @@ void setup() {
 }
 
 void loop(){
-  
+  digitalWrite(led0, HIGH);
+  digitalWrite(led1, HIGH);
   //если кнопка1 и                   && steps < НУЖНОГО тогда поворачиваем
   if (digitalRead(buttonPin1) == LOW){// && steps <=70){
     anticlockwise(); // крутим влево если нажата кнопка 1. и увеличиваем кол-во шагов вращая(когда кнопка нажата это 1 сигнал или много? проверить)  
@@ -122,12 +132,15 @@ void oneStep(){
     for(int i =0; i<=40; i++){
       //подняли ногу
       clockwise1();
+      myservo.write(60);
       //повернули ногу
       anticlockwise();
     }
     for(int i =0; i<=40; i++){
       //опустили ногу
       anticlockwise1();      
+      myservo.write(10);
+      delay(10);
     }
     for(int i =0; i<=40; i++){
       //повернули
