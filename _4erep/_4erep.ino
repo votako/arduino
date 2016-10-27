@@ -124,8 +124,7 @@ void clockwise1() {
 }
 //--------------------------------------
 //for 5 button
-//rightLeft
-void 1(){
+void rightLeft(){
     for(int i =0; i<=45; i++){
       clockwise1();
     }
@@ -136,8 +135,8 @@ void 1(){
       clockwise1();
     }
 }
-//klacKlac
-void 2(int klac){
+
+void klacKlac(int klac){
   for(int j=0; j<= klac; j++){
     for(int i =0; i<=45; i++){
         clockwise();
@@ -147,8 +146,8 @@ void 2(int klac){
     }
   }
 }
-//shuffle
-void 3(){
+
+void shuffle(){
   //left
   for(int i =0; i<=50; i++){
     clockwise1();
